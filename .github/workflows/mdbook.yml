@@ -1,0 +1,636 @@
+# Sample workflow for building and deploying a mdBook site to GitHub Pages
+#
+# To get started with mdBook see: https://rust-lang.github.io/mdBook/index.html
+#
+name: Deploy mdBook site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MDBOOK_VERSION: 0.4.36
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mdBook
+        run: |
+          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
+          rustup update
+          cargo install --version ${MDBOOK_VERSION} mdbook
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build with mdBook
+        run: mdbook build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./book
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título otimizado para SEO -->
+    <title>Comprovantes em Geral - Renda, Residência, Rendimentos e Movimentações Bancárias</title>
+    
+    <!-- Meta Description (até 160 caracteres) -->
+    <meta name="description" content="Serviço especializado em comprovantes para fins didáticos: comprovante de renda, residência, rendimentos e movimentações bancárias. Atendimento via WhatsApp.">
+    
+    <!-- Meta Keywords (relevantes para o negócio) -->
+    <meta name="keywords" content="comprovante de renda, comprovante residência, comprovante rendimentos, movimentações bancárias, documentos, holerite, contracheque, comprovante endereço, extrato bancário, declaração de rendimento">
+    
+    <!-- Meta Author -->
+    <meta name="author" content="77editore">
+    
+    <!-- Meta Robots (para indexação) -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL (evita conteúdo duplicado) -->
+    <link rel="canonical" href="https://seusite.com/comprovantes-geral">
+    
+    <!-- Open Graph Tags (para redes sociais) -->
+    <meta property="og:title" content="Comprovantes em Geral - Serviços de Documentos">
+    <meta property="og:description" content="Serviço especializado em comprovantes para fins didáticos: comprovante de renda, residência, rendimentos e movimentações bancárias.">
+    <meta property="og:url" content="https://seusite.com/comprovantes-geral">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://seusite.com/images/comprovantes-og-image.jpg">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Comprovantes em Geral - Serviços de Documentos">
+    <meta name="twitter:description" content="Serviço especializado em comprovantes para fins didáticos.">
+    <meta name="twitter:image" content="https://seusite.com/images/comprovantes-twitter-image.jpg">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Comprovantes em Geral",
+      "description": "Serviço especializado em comprovantes para fins didáticos",
+      "url": "https://seusite.com/comprovantes-geral",
+      "telephone": "+55-98-98471-1503",
+      "email": "77editore@gmail.com",
+      "serviceType": "comprovante de renda, comprovante residência, comprovante rendimentos, movimentações bancárias",
+      "areaServed": "BR",
+      "availableLanguage": "Portuguese"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #16a34a;
+            --accent: #ea580c;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --gray: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9fafb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffd700;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(29, 78, 216, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f1f5f9"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23dbeafe" stroke-width="2"/></svg>');
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-card.featured {
+            border: 3px solid #ffd700;
+            position: relative;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #7c2d12;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-header i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-body ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .card-body li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-body li i {
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        .card-body li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: var(--light);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .contact-method {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-method i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .contact-method h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .contact-method p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .email-link {
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        .email-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+            color: #d1d5db;
+        }
+        
+        .copyright {
+            border-top: 1px solid #374151;
+            padding-top: 20px;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h1>Comprovantes <span>em Geral</span></h1>
+                </div>
+                <div class="tagline">
+                    <p>Documentos para fins didáticos e demonstrações</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Comprovantes de Qualidade para <span class="highlight">Suas Necessidades</span></h2>
+            <p>Oferecemos serviços especializados na elaboração de comprovantes para fins didáticos e demonstrações. Todos os documentos são desenvolvidos com alto padrão de qualidade e atenção aos detalhes.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+                <p>Oferecemos uma variedade de comprovantes para atender suas necessidades específicas</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Featured Service Card -->
+                <div class="service-card featured">
+                    <div class="featured-badge">Destaque</div>
+                    <div class="card-header">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>Comprovante de Renda</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Documentos que comprovam renda para os mais diversos fins:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Holerites e contracheques</li>
+                            <li><i class="fas fa-check-circle"></i> Declarações de rendimento</li>
+                            <li><i class="fas fa-check-circle"></i> Comprovantes de autônomo</li>
+                            <li><i class="fas fa-check-circle"></i> Declarações de MEI</li>
+                            <li><i class="fas fa-check-circle"></i> Relatórios de renda mensal</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Regular Service Cards -->
+                <div class="service-card">
+                    <div class="card-header" style="background: #16a34a;">
+                        <i class="fas fa-home"></i>
+                        <h3>Comprovante de Residência</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Documentos que comprovam endereço residencial:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Contas de água, luz e gás</li>
+                            <li><i class="fas fa-check-circle"></i> Contratos de aluguel</li>
+                            <li><i class="fas fa-check-circle"></i> Contas de telefone e internet</li>
+                            <li><i class="fas fa-check-circle"></i> Comprovantes bancários</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-header" style="background: #ea580c;">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Comprovante de Rendimentos</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Documentos de rendimentos e movimentações:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Declaração de Imposto de Renda</li>
+                            <li><i class="fas fa-check-circle"></i> Extratos bancários</li>
+                            <li><i class="fas fa-check-circle"></i> Comprovantes de investimentos</li>
+                            <li><i class="fas fa-check-circle"></i> Relatórios de rendimentos anuais</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="card-header" style="background: #7c3aed;">
+                        <i class="fas fa-university"></i>
+                        <h3>Movimentações Bancárias</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Comprovantes de movimentação financeira:</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Extratos conta corrente/poupança</li>
+                            <li><i class="fas fa-check-circle"></i> Comprovantes de transferência</li>
+                            <li><i class="fas fa-check-circle"></i> Comprovantes de depósito</li>
+                            <li><i class="fas fa-check-circle"></i> Investimentos e aplicações</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+                <p>Estamos à disposição para atender suas necessidades de documentação</p>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-method">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>Fale conosco diretamente pelo WhatsApp para um atendimento rápido e personalizado.</p>
+                    <a href="https://wa.me/5598984711503" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> (98) 98471-1503
+                    </a>
+                </div>
+
+                <div class="contact-method">
+                    <i class="fas fa-envelope"></i>
+                    <h3>E-mail</h3>
+                    <p>Envie suas dúvidas e solicitações por e-mail para nossa equipe especializada.</p>
+                    <a href="mailto:77editore@gmail.com" class="email-link">77editore@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Comprovantes em Geral</h3>
+                    <p>Serviço especializado em documentação para fins didáticos e demonstrações.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fab fa-whatsapp"></i> (98) 98471-1503</p>
+                    <p><i class="fas fa-envelope"></i> 77editore@gmail.com</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Informações</h3>
+                    <p>Documentos para fins didáticos</p>
+                    <p>Serviço de demonstração</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 Comprovantes em Geral. Todos os direitos reservados.</p>
+                <p>Este site oferece serviços para fins didáticos e de demonstração.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // Simple animation for service cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.service-card');
+            
+            cards.forEach((card, index) => {
+                // Add delay based on index for staggered animation
+                card.style.animationDelay = `${index * 0.2}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+            
+            // Add hover effect to WhatsApp button
+            const whatsappBtn = document.querySelector('.whatsapp-btn');
+            if (whatsappBtn) {
+                whatsappBtn.addEventListener('mouseover', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                whatsappBtn.addEventListener('mouseout', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
